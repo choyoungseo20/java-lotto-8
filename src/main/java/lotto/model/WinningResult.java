@@ -15,4 +15,8 @@ public class WinningResult {
     public Map<LottoRank, Integer> getRankCount() {
         return rankCount;
     }
+
+    public Integer getCountByRank(LottoRank lottoRank) {
+        return rankCount.getOrDefault(lottoRank, 0);
+    }
 }
