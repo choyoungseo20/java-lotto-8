@@ -33,22 +33,46 @@ public class LottoController {
     }
 
     private PurchaseAmount readPurchaseAmount() {
-        Integer purchaseAmount = inputView.readPurchaseAmount();
-        return new PurchaseAmount(purchaseAmount);
+        while (true) {
+            try {
+                Integer purchaseAmount = inputView.readPurchaseAmount();
+                return new PurchaseAmount(purchaseAmount);
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+            }
+        }
     }
 
     private WinningLotto readWinningLotto() {
         Lotto mainNumbers = readMainWinningLottoNumbers();
-        Integer bonusNumber = readBonusWinningLottoNumber();
-        return new WinningLotto(mainNumbers, bonusNumber);
+        while (true) {
+            try {
+                Integer bonusNumber = readBonusWinningLottoNumber();
+                return new WinningLotto(mainNumbers, bonusNumber);
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+            }
+        }
     }
 
     private Lotto readMainWinningLottoNumbers() {
-        List<Integer> mainWinningLottoNumbers = inputView.readMainWinningLottoNumbers();
-        return new Lotto(mainWinningLottoNumbers);
+        while (true) {
+            try {
+                List<Integer> mainWinningLottoNumbers = inputView.readMainWinningLottoNumbers();
+                return new Lotto(mainWinningLottoNumbers);
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+            }
+        }
     }
 
     private Integer readBonusWinningLottoNumber() {
-        return inputView.readBonusWinningLottoNumber();
+        while (true) {
+            try {
+                return inputView.readBonusWinningLottoNumber();
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+            }
+        }
     }
 }
