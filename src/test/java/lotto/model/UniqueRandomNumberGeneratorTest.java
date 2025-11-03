@@ -1,14 +1,16 @@
 package lotto.model;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import lotto.model.generator.NumberGenerator;
 import lotto.model.generator.UniqueRandomNumberGenerator;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UniqueRandomNumberGeneratorTest {
 
@@ -35,7 +37,7 @@ public class UniqueRandomNumberGeneratorTest {
 
         List<Integer> numbers = generator.generateNumbers(COUNT);
 
-        assertThat(numbers.size()).isEqualTo(COUNT);
+        assertThat(numbers).hasSize(COUNT);
     }
 
     @DisplayName("랜덤 숫자에 중복이 없는지 확인한다.")

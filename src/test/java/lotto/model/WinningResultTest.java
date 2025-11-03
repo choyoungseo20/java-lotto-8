@@ -1,12 +1,9 @@
 package lotto.model;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-import java.util.List;
-import lotto.model.generator.NumberGenerator;
-import lotto.model.generator.UniqueRandomNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningResultTest {
 
