@@ -37,6 +37,12 @@ public class LottoService {
         return winningResult;
     }
 
+    public double calculateRateOfReturn(PurchaseAmount purchaseAmount, WinningResult winningResult) {
+        Integer totalPrize = winningResult.calculateTotalPrize();
+        double rateOfReturn = (double) totalPrize / purchaseAmount.getValue() * 100;
+        return Math.round(rateOfReturn * 10) / 10.0;
+    }
+
     private Lotto createLotto() {
         NumberGenerator lottoGenerator = new UniqueRandomNumberGenerator(LOWER_BOUND, UPPER_BOUND);
         List<Integer> lottoNumbers = lottoGenerator.generateNumbers(COUNT);
