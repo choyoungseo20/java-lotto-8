@@ -7,4 +7,8 @@ public class PurchaseAmount {
     public PurchaseAmount(Integer value) {
         this.value = value;
     }
+
+    public Integer getValue() {
+        return value;
+    }
 }
