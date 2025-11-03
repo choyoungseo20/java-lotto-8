@@ -2,11 +2,14 @@ package lotto.model;
 
 public class WinningLotto {
 
+    private static final String DUPLICATE_WINNING_LOTTO_NUMBER_ERROR_MESSAGE = "[ERROR] 로또 당첨 번호는 중복될 수 없습니다.";
+
     private final Lotto main;
     private final Integer bonusNumber;
 
     public WinningLotto(Lotto main, Integer bonusNumber) {
         this.main = main;
+        validate(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
@@ -16,5 +19,15 @@ public class WinningLotto {
 
     public Integer getBonusNumber() {
         return bonusNumber;
+    }
+
+    private void validate(Integer number) {
+        if (isDuplicate(number)) {
+            throw new IllegalArgumentException(DUPLICATE_WINNING_LOTTO_NUMBER_ERROR_MESSAGE);
+        }
+    }
+
+    private boolean isDuplicate(Integer number) {
+        return main.getNumbers().contains(number);
     }
 }
