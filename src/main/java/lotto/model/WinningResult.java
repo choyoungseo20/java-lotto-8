@@ -19,4 +19,10 @@ public class WinningResult {
     public Integer getCountByRank(LottoRank lottoRank) {
         return rankCount.getOrDefault(lottoRank, 0);
     }
+
+    public Integer calculateTotalPrize() {
+        return rankCount.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+    }
 }
