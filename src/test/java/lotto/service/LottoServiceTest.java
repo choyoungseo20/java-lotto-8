@@ -17,12 +17,14 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoServiceTest {
 
-    private LottoService lottoService = new LottoService();
+    private LottoService lottoService;
     private List<Lotto> purchasedLottos;
     private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
+        lottoService = new LottoService();
+
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(2, 3, 4, 5, 6, 7));
         Lotto lotto3 = new Lotto(List.of(3, 4, 5, 6, 7, 8));
