@@ -38,7 +38,7 @@ public class LottoService {
     }
 
     public double calculateRateOfReturn(PurchaseAmount purchaseAmount, WinningResult winningResult) {
-        Integer totalPrize = winningResult.calculateTotalPrize();
+        long totalPrize = winningResult.calculateTotalPrize();
         double rateOfReturn = (double) totalPrize / purchaseAmount.getValue() * 100;
         return Math.round(rateOfReturn * 10) / 10.0;
     }
