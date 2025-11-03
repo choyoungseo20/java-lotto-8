@@ -3,7 +3,10 @@ package lotto.service;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.model.Lotto;
+import lotto.model.LottoRank;
 import lotto.model.PurchaseAmount;
+import lotto.model.WinningLotto;
+import lotto.model.WinningResult;
 import lotto.model.generator.NumberGenerator;
 import lotto.model.generator.UniqueRandomNumberGenerator;
 
@@ -23,9 +26,31 @@ public class LottoService {
         return lottos;
     }
 
+    public WinningResult checkWinning(List<Lotto> purchasedLottos, WinningLotto winningLotto) {
+        WinningResult winningResult = new WinningResult();
+
+        for (Lotto lotto : purchasedLottos) {
+            LottoRank lottoRank = checkLottoRank(lotto, winningLotto);
+            winningResult.put(lottoRank);
+        }
+
+        return winningResult;
+    }
+
     private Lotto createLotto() {
         NumberGenerator lottoGenerator = new UniqueRandomNumberGenerator(LOWER_BOUND, UPPER_BOUND);
         List<Integer> lottoNumbers = lottoGenerator.generateNumbers(COUNT);
         return new Lotto(lottoNumbers);
+    }
+
+    private LottoRank checkLottoRank(Lotto lotto, WinningLotto winningLotto) {
+        List<Integer> winningMainNumbers = winningLotto.getMain().getNumbers();
+        int matchCount = (int) lotto.getNumbers().stream()
+                .filter(winningMainNumbers::contains)
+                .count();
+
+        boolean hasBonusNumber = lotto.getNumbers().contains(winningLotto.getBonusNumber());
+
+        return LottoRank.of(matchCount, hasBonusNumber);
     }
 }
