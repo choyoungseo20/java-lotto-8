@@ -45,4 +45,17 @@ public class LottoServiceTest {
         assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
         assertThat(result.getCountByRank(LottoRank.FOURTH)).isEqualTo(1);
     }
+
+    @DisplayName("수익률을 정확히 계산하는지 확인한다.")
+    @Test
+    void 수익률을_정확히_계산하는지_확인한다() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(5000);
+
+        WinningResult winningResult = new WinningResult();
+        winningResult.put(LottoRank.FIRST);
+
+        double rateOfReturn = lottoService.calculateRateOfReturn(purchaseAmount, winningResult);
+
+        assertThat(rateOfReturn).isEqualTo(40_000_000.0);
+    }
 }
