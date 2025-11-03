@@ -3,6 +3,7 @@ package lotto.model;
 public class PurchaseAmount {
 
     private static final String  PURCHASE_AMOUNT_INVALID_UNIT_ERROR_MESSAGE = "[ERROR] 1000원 단위로 입력해주세요.";
+    private static final String  PURCHASE_AMOUNT_TOO_SMALL_ERROR_MESSAGE = "[ERROR] 1000원 이상의 금액을 입력해주세요.";
 
     private final Integer value;
 
@@ -18,6 +19,9 @@ public class PurchaseAmount {
     private void validate(Integer value) {
         if (value % 1000 != 0) {
             throw new IllegalArgumentException(PURCHASE_AMOUNT_INVALID_UNIT_ERROR_MESSAGE);
+        }
+        if (value < 1000) {
+            throw new IllegalArgumentException(PURCHASE_AMOUNT_TOO_SMALL_ERROR_MESSAGE);
         }
     }
 }
