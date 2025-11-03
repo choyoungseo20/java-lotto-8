@@ -1,5 +1,8 @@
 package lotto.service;
 
+import lotto.model.LottoRank;
+import lotto.model.WinningLotto;
+import lotto.model.WinningResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,5 +24,25 @@ public class LottoServiceTest {
         List<Lotto> lottos = lottoService.createLottos(purchaseAmount);
 
         assertThat(lottos).hasSize(5);
+    }
+
+    @DisplayName("당첨 결과를 정확히 생성하는지 확인한다.")
+    @Test
+    void 당첨_결과를_정확히_생성하는지_확인한다() {
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(List.of(2, 3, 4, 5, 6, 7));
+        Lotto lotto3 = new Lotto(List.of(3, 4, 5, 6, 7, 8));
+        List<Lotto> purchasedLottos = List.of(lotto1, lotto2, lotto3);
+
+        WinningLotto winningLotto = new WinningLotto(
+                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+                7
+        );
+
+        WinningResult result = lottoService.checkWinning(purchasedLottos, winningLotto);
+
+        assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(result.getCountByRank(LottoRank.FOURTH)).isEqualTo(1);
     }
 }
