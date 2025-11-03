@@ -19,6 +19,10 @@ public class OutputView {
     private static final String WINNING_SECOND_RANK_MESSAGE = "5개 일치, 보너스 볼 일치 (30,000,000원) - {0}개";
     private static final String WINNING_FIRST_RANK_MESSAGE = "6개 일치 (2,000,000,000원) - {0}개";
 
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
     public void printPurchasedLottos(List<Lotto> lottos) {
         printPurchasedLottoCount(lottos.size());
         lottos.forEach(this::printLotto);
