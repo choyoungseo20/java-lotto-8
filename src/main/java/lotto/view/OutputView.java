@@ -10,6 +10,7 @@ import lotto.model.WinningResult;
 
 public class OutputView {
 
+    private static final String RATE_OF_RETURN_FORMAT = "%,.1f";
     private static final String PURCHASED_LOTTO_COUNT_MESSAGE = "{0}개를 구매했습니다.";
     private static final String WINNING_STATISTICS = "당첨 통계\n---";
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 {0}%입니다.";
@@ -60,6 +61,7 @@ public class OutputView {
     }
 
     private void printRateOfReturn(double rateOfReturn) {
-        System.out.println(MessageFormat.format(RATE_OF_RETURN_MESSAGE, String.format("%.1f", rateOfReturn)));
+        System.out.println(MessageFormat.format(
+                RATE_OF_RETURN_MESSAGE, String.format(RATE_OF_RETURN_FORMAT, rateOfReturn)));
     }
 }
