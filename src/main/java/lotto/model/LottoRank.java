@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.Map;
+
 public enum LottoRank {
 
     FIRST(6, 2_000_000_000),
@@ -8,6 +10,13 @@ public enum LottoRank {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
     NONE(0, 0);
+
+    private static final Map<Integer, LottoRank> LOTTO_RANKS = Map.of(
+            3, FIFTH,
+            4, FOURTH,
+            5, THIRD,
+            6, FIRST
+    );
 
     private final int matchCount;
     private final int prize;
@@ -18,22 +27,10 @@ public enum LottoRank {
     }
 
     public static LottoRank of(int matchCount, boolean hasBonusNumber) {
-        if (matchCount == 6) {
-            return FIRST;
-        }
         if (matchCount == 5 && hasBonusNumber) {
             return SECOND;
         }
-        if (matchCount == 5) {
-            return THIRD;
-        }
-        if (matchCount == 4) {
-            return FOURTH;
-        }
-        if (matchCount == 3) {
-            return FIFTH;
-        }
-        return NONE;
+        return LOTTO_RANKS.getOrDefault(matchCount, NONE);
     }
 
     public int getMatchCount() {
