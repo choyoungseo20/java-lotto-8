@@ -12,6 +12,10 @@ public class PurchaseAmount {
         this.value = value;
     }
 
+    public Integer getPurchaseCount() {
+        return value / 1000;
+    }
+
     public Integer getValue() {
         return value;
     }
